@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { useForm } from 'react-hook-form';
 import './App.css';
 import ErrorMessage from './ErrorMessage';
@@ -14,9 +13,11 @@ export default function App() {
   } = useForm();
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-  const onSubmit = data => {
-    console.log(data);
-    // alert(JSON.stringify(data));
+  const onSubmit = (data, e) => {
+    // await sleep(1000);
+    // console.log(data);
+    alert(JSON.stringify(data));
+    e.target.reset();
   };
 
   const validateUserName = async value => {
@@ -78,10 +79,7 @@ export default function App() {
       <label>About you</label>
       <textarea name="aboutYou" ref={register({ required: true })} />
 
-      <input name="submit" type="submit" disabled={isSubmitting} />
+      <input type="submit" disabled={isSubmitting} />
     </form>
   );
 }
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
